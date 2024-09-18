@@ -30,21 +30,19 @@
         {
             lblNome = new Label();
             gpCliente = new GroupBox();
-            groupBox1 = new GroupBox();
             txtCPF = new MaskedTextBox();
             lblCPF = new Label();
             txtNome = new TextBox();
             gpDadosPessoais = new GroupBox();
+            chkPlacaDoCarro = new CheckBox();
+            chkTelefone = new CheckBox();
             txtTelefone = new MaskedTextBox();
             label1 = new Label();
             txtPlacaDoCarro = new TextBox();
             label2 = new Label();
-            rdSim = new RadioButton();
-            rdNao = new RadioButton();
             btnSalvar = new Button();
-            btnSelecionar = new Button();
+            btnFechar = new Button();
             gpCliente.SuspendLayout();
-            groupBox1.SuspendLayout();
             gpDadosPessoais.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,7 +58,6 @@
             // 
             // gpCliente
             // 
-            gpCliente.Controls.Add(groupBox1);
             gpCliente.Controls.Add(txtCPF);
             gpCliente.Controls.Add(lblCPF);
             gpCliente.Controls.Add(txtNome);
@@ -68,29 +65,19 @@
             gpCliente.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gpCliente.Location = new Point(12, 12);
             gpCliente.Name = "gpCliente";
-            gpCliente.Size = new Size(640, 168);
+            gpCliente.Size = new Size(640, 107);
             gpCliente.TabIndex = 1;
             gpCliente.TabStop = false;
             gpCliente.Text = "Informações do cliente";
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(rdNao);
-            groupBox1.Controls.Add(rdSim);
-            groupBox1.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(21, 100);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(240, 50);
-            groupBox1.TabIndex = 5;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Deseja compartilhar dados pessoais?";
-            // 
             // txtCPF
             // 
             txtCPF.Location = new Point(357, 49);
+            txtCPF.Mask = "000\\.000\\.000-00";
             txtCPF.Name = "txtCPF";
             txtCPF.Size = new Size(254, 33);
             txtCPF.TabIndex = 3;
+            txtCPF.KeyPress += txtCPF_KeyPress;
             // 
             // lblCPF
             // 
@@ -111,24 +98,54 @@
             // 
             // gpDadosPessoais
             // 
+            gpDadosPessoais.Controls.Add(chkPlacaDoCarro);
+            gpDadosPessoais.Controls.Add(chkTelefone);
             gpDadosPessoais.Controls.Add(txtTelefone);
             gpDadosPessoais.Controls.Add(label1);
             gpDadosPessoais.Controls.Add(txtPlacaDoCarro);
             gpDadosPessoais.Controls.Add(label2);
             gpDadosPessoais.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gpDadosPessoais.Location = new Point(12, 197);
+            gpDadosPessoais.Location = new Point(12, 148);
             gpDadosPessoais.Name = "gpDadosPessoais";
             gpDadosPessoais.Size = new Size(640, 131);
             gpDadosPessoais.TabIndex = 4;
             gpDadosPessoais.TabStop = false;
             gpDadosPessoais.Text = "Dados pessoais";
             // 
+            // chkPlacaDoCarro
+            // 
+            chkPlacaDoCarro.AutoSize = true;
+            chkPlacaDoCarro.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkPlacaDoCarro.Location = new Point(357, 88);
+            chkPlacaDoCarro.Name = "chkPlacaDoCarro";
+            chkPlacaDoCarro.Size = new Size(63, 20);
+            chkPlacaDoCarro.TabIndex = 5;
+            chkPlacaDoCarro.Text = "Possui";
+            chkPlacaDoCarro.UseVisualStyleBackColor = true;
+            chkPlacaDoCarro.CheckedChanged += chkPlacaDoCarro_CheckedChanged;
+            // 
+            // chkTelefone
+            // 
+            chkTelefone.AutoSize = true;
+            chkTelefone.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkTelefone.Location = new Point(21, 88);
+            chkTelefone.Name = "chkTelefone";
+            chkTelefone.Size = new Size(63, 20);
+            chkTelefone.TabIndex = 4;
+            chkTelefone.Text = "Possui";
+            chkTelefone.UseVisualStyleBackColor = true;
+            chkTelefone.CheckedChanged += chkTelefone_CheckedChanged;
+            // 
             // txtTelefone
             // 
+            txtTelefone.Enabled = false;
+            txtTelefone.Font = new Font("Yu Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtTelefone.Location = new Point(21, 49);
+            txtTelefone.Mask = "(00) 000000000";
             txtTelefone.Name = "txtTelefone";
-            txtTelefone.Size = new Size(254, 33);
+            txtTelefone.Size = new Size(254, 28);
             txtTelefone.TabIndex = 3;
+            txtTelefone.KeyPress += txtTelefone_KeyPress;
             // 
             // label1
             // 
@@ -142,9 +159,11 @@
             // 
             // txtPlacaDoCarro
             // 
+            txtPlacaDoCarro.Enabled = false;
+            txtPlacaDoCarro.Font = new Font("Yu Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPlacaDoCarro.Location = new Point(357, 49);
             txtPlacaDoCarro.Name = "txtPlacaDoCarro";
-            txtPlacaDoCarro.Size = new Size(254, 33);
+            txtPlacaDoCarro.Size = new Size(254, 28);
             txtPlacaDoCarro.TabIndex = 1;
             // 
             // label2
@@ -157,65 +176,45 @@
             label2.TabIndex = 0;
             label2.Text = "Telefone";
             // 
-            // rdSim
-            // 
-            rdSim.AutoSize = true;
-            rdSim.Font = new Font("Yu Gothic", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rdSim.Location = new Point(41, 22);
-            rdSim.Name = "rdSim";
-            rdSim.Size = new Size(44, 18);
-            rdSim.TabIndex = 0;
-            rdSim.TabStop = true;
-            rdSim.Text = "Sim";
-            rdSim.UseVisualStyleBackColor = true;
-            // 
-            // rdNao
-            // 
-            rdNao.AutoSize = true;
-            rdNao.Font = new Font("Yu Gothic", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rdNao.Location = new Point(130, 22);
-            rdNao.Name = "rdNao";
-            rdNao.Size = new Size(45, 18);
-            rdNao.TabIndex = 1;
-            rdNao.TabStop = true;
-            rdNao.Text = "Não";
-            rdNao.UseVisualStyleBackColor = true;
-            // 
             // btnSalvar
             // 
-            btnSalvar.Location = new Point(12, 373);
+            btnSalvar.Location = new Point(12, 300);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(75, 23);
             btnSalvar.TabIndex = 5;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
-            // btnSelecionar
+            // btnFechar
             // 
-            btnSelecionar.Location = new Point(577, 373);
-            btnSelecionar.Name = "btnSelecionar";
-            btnSelecionar.Size = new Size(75, 23);
-            btnSelecionar.TabIndex = 6;
-            btnSelecionar.Text = "Fechar";
-            btnSelecionar.UseVisualStyleBackColor = true;
+            btnFechar.Location = new Point(577, 300);
+            btnFechar.Name = "btnFechar";
+            btnFechar.Size = new Size(75, 23);
+            btnFechar.TabIndex = 6;
+            btnFechar.Text = "Fechar";
+            btnFechar.UseVisualStyleBackColor = true;
+            btnFechar.Click += btnSelecionar_Click;
             // 
             // CadastroCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(664, 423);
-            Controls.Add(btnSelecionar);
+            ClientSize = new Size(664, 347);
+            Controls.Add(btnFechar);
             Controls.Add(btnSalvar);
             Controls.Add(gpDadosPessoais);
             Controls.Add(gpCliente);
+            MaximizeBox = false;
+            MaximumSize = new Size(680, 386);
+            MinimizeBox = false;
+            MinimumSize = new Size(680, 386);
             Name = "CadastroCliente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de cliente";
-            WindowState = FormWindowState.Minimized;
+            TopMost = true;
             gpCliente.ResumeLayout(false);
             gpCliente.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             gpDadosPessoais.ResumeLayout(false);
             gpDadosPessoais.PerformLayout();
             ResumeLayout(false);
@@ -233,10 +232,9 @@
         private Label label1;
         private TextBox txtPlacaDoCarro;
         private Label label2;
-        private GroupBox groupBox1;
-        private RadioButton rdSim;
-        private RadioButton rdNao;
         private Button btnSalvar;
-        private Button btnSelecionar;
+        private Button btnFechar;
+        private CheckBox chkPlacaDoCarro;
+        private CheckBox chkTelefone;
     }
 }

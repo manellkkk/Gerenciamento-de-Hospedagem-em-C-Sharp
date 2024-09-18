@@ -69,12 +69,14 @@
             produtoToolStripMenuItem.Name = "produtoToolStripMenuItem";
             produtoToolStripMenuItem.Size = new Size(180, 22);
             produtoToolStripMenuItem.Text = "Produto";
+            produtoToolStripMenuItem.Click += produtoToolStripMenuItem_Click;
             // 
             // hospedagemToolStripMenuItem
             // 
             hospedagemToolStripMenuItem.Name = "hospedagemToolStripMenuItem";
             hospedagemToolStripMenuItem.Size = new Size(180, 22);
             hospedagemToolStripMenuItem.Text = "Hospedagem";
+            hospedagemToolStripMenuItem.Click += hospedagemToolStripMenuItem_Click;
             // 
             // consultaToolStripMenuItem
             // 
@@ -86,20 +88,23 @@
             // clienteToolStripMenuItem1
             // 
             clienteToolStripMenuItem1.Name = "clienteToolStripMenuItem1";
-            clienteToolStripMenuItem1.Size = new Size(145, 22);
+            clienteToolStripMenuItem1.Size = new Size(180, 22);
             clienteToolStripMenuItem1.Text = "Cliente";
+            clienteToolStripMenuItem1.Click += clienteToolStripMenuItem1_Click;
             // 
             // produtoToolStripMenuItem1
             // 
             produtoToolStripMenuItem1.Name = "produtoToolStripMenuItem1";
-            produtoToolStripMenuItem1.Size = new Size(145, 22);
+            produtoToolStripMenuItem1.Size = new Size(180, 22);
             produtoToolStripMenuItem1.Text = "Produto";
+            produtoToolStripMenuItem1.Click += produtoToolStripMenuItem1_Click;
             // 
             // hospedagemToolStripMenuItem1
             // 
             hospedagemToolStripMenuItem1.Name = "hospedagemToolStripMenuItem1";
-            hospedagemToolStripMenuItem1.Size = new Size(145, 22);
+            hospedagemToolStripMenuItem1.Size = new Size(180, 22);
             hospedagemToolStripMenuItem1.Text = "Hospedagem";
+            hospedagemToolStripMenuItem1.Click += hospedagemToolStripMenuItem1_Click;
             // 
             // sairToolStripMenuItem
             // 
