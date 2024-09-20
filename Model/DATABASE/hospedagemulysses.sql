@@ -40,7 +40,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('manel do capa','617.241.433-01','(  ) ','');
+INSERT INTO `cliente` VALUES ('manelzinho mira dura','232.131.231-31','(  ) ',''),('manel do caps','617.241.433-01','(98) 985514664','AB34F5');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,19 +52,18 @@ DROP TABLE IF EXISTS `consumo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `consumo` (
-  `idProdutoConsumido` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_produto` int(11) DEFAULT NULL,
+  `idConsumo` int(11) NOT NULL AUTO_INCREMENT,
+  `fk_produto` int(11) NOT NULL,
   `fk_hospedagem` int(11) NOT NULL,
   `quantidade` int(11) DEFAULT NULL,
   `dataConsumo` date DEFAULT NULL,
-  `valorTotal` double DEFAULT NULL,
-  PRIMARY KEY (`idProdutoConsumido`),
-  UNIQUE KEY `idProdutoConsumido_UNIQUE` (`idProdutoConsumido`),
+  PRIMARY KEY (`idConsumo`),
+  UNIQUE KEY `idProdutoConsumido_UNIQUE` (`idConsumo`),
   KEY `produto_idx` (`fk_produto`),
   KEY `hospedagem_idx` (`fk_hospedagem`),
   CONSTRAINT `hospedagem` FOREIGN KEY (`fk_hospedagem`) REFERENCES `hospedagem` (`idHospedagem`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `produto` FOREIGN KEY (`fk_produto`) REFERENCES `produto` (`idProduto`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `produto` FOREIGN KEY (`fk_produto`) REFERENCES `produto` (`idProduto`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +72,7 @@ CREATE TABLE `consumo` (
 
 LOCK TABLES `consumo` WRITE;
 /*!40000 ALTER TABLE `consumo` DISABLE KEYS */;
+INSERT INTO `consumo` VALUES (6,14,27,5,'2024-09-20'),(7,14,27,5,'2024-09-20'),(9,14,27,2,'2024-09-20'),(10,14,27,2,'2024-09-20');
 /*!40000 ALTER TABLE `consumo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,15 +85,15 @@ DROP TABLE IF EXISTS `hospedagem`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hospedagem` (
   `idHospedagem` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_cliente` varchar(20) DEFAULT NULL,
+  `fk_cliente` varchar(20) NOT NULL,
   `dataEntrada` date NOT NULL,
   `dataSaida` date DEFAULT NULL,
   `valor` double NOT NULL,
   `quarto` int(11) NOT NULL,
   PRIMARY KEY (`idHospedagem`),
   KEY `fk_cliente_idx` (`fk_cliente`),
-  CONSTRAINT `fk_cliente` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`cpf`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_cliente` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`cpf`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `hospedagem` (
 
 LOCK TABLES `hospedagem` WRITE;
 /*!40000 ALTER TABLE `hospedagem` DISABLE KEYS */;
-INSERT INTO `hospedagem` VALUES (24,'617.241.433-01','2009-12-25',NULL,2,3);
+INSERT INTO `hospedagem` VALUES (27,'617.241.433-01','2024-09-20',NULL,20,1),(28,'232.131.231-31','2024-09-20',NULL,42,2);
 /*!40000 ALTER TABLE `hospedagem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `produto` (
   `valor` varchar(45) NOT NULL,
   PRIMARY KEY (`idProduto`),
   UNIQUE KEY `idProduto_UNIQUE` (`idProduto`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `produto` (
 
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (7,'ma',2,'3'),(8,'jesusuguanrana',1,'1'),(9,'pepsi',2,'250'),(10,'jesus guaranas',2,'2.5'),(11,'manelll cocks',2,'2.5'),(12,'maneldocaps',2,'30.5'),(13,'maneldocaps2',2,'30.5');
+INSERT INTO `produto` VALUES (14,'Coca-cola',1,'11'),(15,'Jesus',25,'4.5');
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -142,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-19 21:15:48
+-- Dump completed on 2024-09-20  4:34:11
