@@ -31,6 +31,17 @@ namespace Hospedagem_em_C_.View.Cadastro
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             ProdutoController produtoController = new ProdutoController();
+
+            //se adicionar, janela fecha
+            if (produtoController.adicionarProduto(txtNome.Text, txtQuantidade.Text, txtValor.Text))
+            {
+                this.Close();
+            }
+        }
+
+        private void txtValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            entradaController.formatoPreco(e, txtValor);
         }
     }
 }

@@ -36,11 +36,11 @@
             toolStrip1 = new ToolStrip();
             tpbNovo = new ToolStripButton();
             tpbEditar = new ToolStripButton();
-            toolStripButton1 = new ToolStripButton();
-            dataGridView1 = new DataGridView();
+            tpExcluir = new ToolStripButton();
+            gvCliente = new DataGridView();
             btnSelecionar = new Button();
             toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvCliente).BeginInit();
             SuspendLayout();
             // 
             // lblSelecionar
@@ -84,7 +84,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tpbNovo, tpbEditar, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tpbNovo, tpbEditar, tpExcluir });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 31);
@@ -112,22 +112,32 @@
             tpbEditar.Text = "Editar";
             tpbEditar.Click += tpbEditar_Click;
             // 
-            // toolStripButton1
+            // tpExcluir
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(23, 28);
-            toolStripButton1.Text = "Excluir";
+            tpExcluir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tpExcluir.Image = (Image)resources.GetObject("tpExcluir.Image");
+            tpExcluir.ImageTransparentColor = Color.Magenta;
+            tpExcluir.Name = "tpExcluir";
+            tpExcluir.Size = new Size(23, 28);
+            tpExcluir.Text = "Excluir";
+            tpExcluir.Click += tpExcluir_Click;
             // 
-            // dataGridView1
+            // gvCliente
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 85);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(776, 268);
-            dataGridView1.TabIndex = 6;
+            gvCliente.AllowUserToAddRows = false;
+            gvCliente.AllowUserToDeleteRows = false;
+            gvCliente.AllowUserToResizeRows = false;
+            gvCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gvCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvCliente.Location = new Point(12, 85);
+            gvCliente.MultiSelect = false;
+            gvCliente.Name = "gvCliente";
+            gvCliente.ReadOnly = true;
+            gvCliente.RowHeadersVisible = false;
+            gvCliente.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            gvCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gvCliente.Size = new Size(776, 268);
+            gvCliente.TabIndex = 6;
             // 
             // btnSelecionar
             // 
@@ -145,7 +155,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 425);
             Controls.Add(btnSelecionar);
-            Controls.Add(dataGridView1);
+            Controls.Add(gvCliente);
             Controls.Add(toolStrip1);
             Controls.Add(btnConsultar);
             Controls.Add(txtConsulta);
@@ -160,7 +170,7 @@
             Text = "Consulta de cliente";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvCliente).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -174,8 +184,8 @@
         private ToolStrip toolStrip1;
         private ToolStripButton tpbNovo;
         private ToolStripButton tpbEditar;
-        private ToolStripButton toolStripButton1;
-        private DataGridView dataGridView1;
+        private ToolStripButton tpExcluir;
+        private DataGridView gvCliente;
         private Button btnSelecionar;
     }
 }

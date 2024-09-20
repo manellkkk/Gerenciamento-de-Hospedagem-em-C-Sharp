@@ -32,20 +32,20 @@
             toolStrip1 = new ToolStrip();
             tpbNovo = new ToolStripButton();
             tpbEditar = new ToolStripButton();
-            toolStripButton1 = new ToolStripButton();
+            tpExcluir = new ToolStripButton();
             btnFechar = new Button();
-            dataGridView1 = new DataGridView();
+            gvProduto = new DataGridView();
             btnConsultar = new Button();
             txtConsulta = new MaskedTextBox();
             cbSelecionar = new ComboBox();
             lblSelecionar = new Label();
             toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvProduto).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tpbNovo, tpbEditar, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tpbNovo, tpbEditar, tpExcluir });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 31);
@@ -71,15 +71,17 @@
             tpbEditar.Name = "tpbEditar";
             tpbEditar.Size = new Size(23, 28);
             tpbEditar.Text = "Editar";
+            tpbEditar.Click += tpbEditar_Click;
             // 
-            // toolStripButton1
+            // tpExcluir
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(23, 28);
-            toolStripButton1.Text = "Excluir";
+            tpExcluir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tpExcluir.Image = (Image)resources.GetObject("tpExcluir.Image");
+            tpExcluir.ImageTransparentColor = Color.Magenta;
+            tpExcluir.Name = "tpExcluir";
+            tpExcluir.Size = new Size(23, 28);
+            tpExcluir.Text = "Excluir";
+            tpExcluir.Click += tpExcluir_Click;
             // 
             // btnFechar
             // 
@@ -91,13 +93,20 @@
             btnFechar.UseVisualStyleBackColor = true;
             btnFechar.Click += btnFechar_Click;
             // 
-            // dataGridView1
+            // gvProduto
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 89);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(776, 268);
-            dataGridView1.TabIndex = 12;
+            gvProduto.AllowUserToAddRows = false;
+            gvProduto.AllowUserToDeleteRows = false;
+            gvProduto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gvProduto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvProduto.Location = new Point(12, 89);
+            gvProduto.MultiSelect = false;
+            gvProduto.Name = "gvProduto";
+            gvProduto.ReadOnly = true;
+            gvProduto.RowHeadersVisible = false;
+            gvProduto.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gvProduto.Size = new Size(776, 268);
+            gvProduto.TabIndex = 12;
             // 
             // btnConsultar
             // 
@@ -143,7 +152,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 425);
             Controls.Add(btnFechar);
-            Controls.Add(dataGridView1);
+            Controls.Add(gvProduto);
             Controls.Add(btnConsultar);
             Controls.Add(txtConsulta);
             Controls.Add(cbSelecionar);
@@ -158,7 +167,7 @@
             Text = "Consulta de produto";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvProduto).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -168,9 +177,9 @@
         private ToolStrip toolStrip1;
         private ToolStripButton tpbNovo;
         private ToolStripButton tpbEditar;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton tpExcluir;
         private Button btnFechar;
-        private DataGridView dataGridView1;
+        private DataGridView gvProduto;
         private Button btnConsultar;
         private MaskedTextBox txtConsulta;
         private ComboBox cbSelecionar;

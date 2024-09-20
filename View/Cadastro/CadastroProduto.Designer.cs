@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             gpProduto = new GroupBox();
+            txtValor = new TextBox();
+            lblValor = new Label();
             txtQuantidade = new TextBox();
             lblQuantidade = new Label();
             txtNome = new TextBox();
@@ -40,6 +42,8 @@
             // 
             // gpProduto
             // 
+            gpProduto.Controls.Add(txtValor);
+            gpProduto.Controls.Add(lblValor);
             gpProduto.Controls.Add(txtQuantidade);
             gpProduto.Controls.Add(lblQuantidade);
             gpProduto.Controls.Add(txtNome);
@@ -47,10 +51,29 @@
             gpProduto.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gpProduto.Location = new Point(12, 12);
             gpProduto.Name = "gpProduto";
-            gpProduto.Size = new Size(640, 113);
+            gpProduto.Size = new Size(640, 167);
             gpProduto.TabIndex = 2;
             gpProduto.TabStop = false;
             gpProduto.Text = "Informações do produto";
+            // 
+            // txtValor
+            // 
+            txtValor.Font = new Font("Yu Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtValor.Location = new Point(21, 116);
+            txtValor.Name = "txtValor";
+            txtValor.Size = new Size(254, 28);
+            txtValor.TabIndex = 5;
+            txtValor.KeyPress += txtValor_KeyPress;
+            // 
+            // lblValor
+            // 
+            lblValor.AutoSize = true;
+            lblValor.Font = new Font("Yu Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblValor.Location = new Point(21, 96);
+            lblValor.Name = "lblValor";
+            lblValor.Size = new Size(93, 17);
+            lblValor.TabIndex = 4;
+            lblValor.Text = "Preco unitario";
             // 
             // txtQuantidade
             // 
@@ -91,7 +114,7 @@
             // 
             // btnSalvar
             // 
-            btnSalvar.Location = new Point(12, 143);
+            btnSalvar.Location = new Point(12, 202);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(75, 23);
             btnSalvar.TabIndex = 3;
@@ -101,7 +124,7 @@
             // 
             // btnFechar
             // 
-            btnFechar.Location = new Point(577, 143);
+            btnFechar.Location = new Point(577, 202);
             btnFechar.Name = "btnFechar";
             btnFechar.Size = new Size(75, 23);
             btnFechar.TabIndex = 4;
@@ -113,14 +136,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(664, 186);
+            ClientSize = new Size(664, 247);
             Controls.Add(btnFechar);
             Controls.Add(btnSalvar);
             Controls.Add(gpProduto);
             MaximizeBox = false;
-            MaximumSize = new Size(680, 225);
+            MaximumSize = new Size(680, 286);
             MinimizeBox = false;
-            MinimumSize = new Size(680, 225);
+            MinimumSize = new Size(680, 286);
             Name = "CadastroProduto";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de produto";
@@ -142,5 +165,7 @@
         private TextBox txtQuantidade;
         private Button btnSalvar;
         private Button btnFechar;
+        private TextBox txtValor;
+        private Label lblValor;
     }
 }

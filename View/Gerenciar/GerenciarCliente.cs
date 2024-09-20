@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Hospedagem_em_C_.Controller;
+using Hospedagem_em_C_.Model.DTO;
+using Hospedagem_em_C_.View.Consulta;
 
 namespace Hospedagem_em_C_.View.Gerenciar
 {
@@ -16,9 +18,13 @@ namespace Hospedagem_em_C_.View.Gerenciar
     {
         JanelaController janelaController = new JanelaController();
         EntradaController entradaController = new EntradaController();
-        public GerenciarCliente()
+        ClienteController clienteController = new ClienteController();
+
+        ClienteDTO cliente;
+        public GerenciarCliente(String cpfCliente)
         {
             InitializeComponent();
+            this.cliente = clienteController.selecionarCliente(cpfCliente);
             inicializarCliente();
         }
 
@@ -27,13 +33,16 @@ namespace Hospedagem_em_C_.View.Gerenciar
             Boolean resposta = janelaController.mensagemCancelamento();
             if (resposta)
             {
-                Dispose();
+                this.Close();
             }
         }
 
         private void inicializarCliente()
         {
-
+            txtNome.Text = cliente.getNome();
+            txtCPF.Text = cliente.getCPF();
+            txtTelefone.Text = cliente.getTelefone();
+            txtPlacaDoCarro.Text = cliente.getPlacaDoCarro();
         }
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
@@ -49,6 +58,14 @@ namespace Hospedagem_em_C_.View.Gerenciar
         private void txtTelefone_KeyPress(object sender, KeyPressEventArgs e)
         {
             entradaController.permitirApenasNumero(e);
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (clienteController.atualizarCliente(cliente.getCPF(), txtNome.Text, txtCPF.Text, txtTelefone.Text, txtPlacaDoCarro.Text))
+            {
+                this.Close();
+            }
         }
     }
 }

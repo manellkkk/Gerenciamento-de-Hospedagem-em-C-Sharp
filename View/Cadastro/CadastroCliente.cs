@@ -22,6 +22,12 @@ namespace Hospedagem_em_C_.View.Cadastro
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             ClienteController clienteController = new ClienteController();
+
+            //tenta adicionar o cliente. se der certo, fecha a janela
+            if (clienteController.adicionarCliente(txtNome.Text, txtCPF.Text, txtTelefone.Text, txtPlacaDoCarro.Text))
+            {
+                this.Close();
+            }
         }
 
         private void btnSelecionar_Click(object sender, EventArgs e)
@@ -41,20 +47,20 @@ namespace Hospedagem_em_C_.View.Cadastro
 
         private void chkTelefone_CheckedChanged(object sender, EventArgs e)
         {
+            txtTelefone.Text = String.Empty;
             if (chkTelefone.Checked)
             {
-                txtTelefone.Text = String.Empty;
                 txtTelefone.Enabled = true;
             }
             else
             {
-                txtPlacaDoCarro.Text = String.Empty;
                 txtTelefone.Enabled = false;
             }
         }
 
         private void chkPlacaDoCarro_CheckedChanged(object sender, EventArgs e)
         {
+            txtPlacaDoCarro.Text = String.Empty;
             if (chkPlacaDoCarro.Checked)
             {
                 txtPlacaDoCarro.Enabled = true;

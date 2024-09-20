@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             gpCliente = new GroupBox();
-            dataGridView1 = new DataGridView();
-            groupBox1 = new GroupBox();
-            maskedTextBox2 = new MaskedTextBox();
+            gvCliente = new DataGridView();
+            gpHospedagem = new GroupBox();
+            txtValor = new TextBox();
+            txtQuarto = new MaskedTextBox();
             label2 = new Label();
-            maskedTextBox1 = new MaskedTextBox();
             label1 = new Label();
-            txtCPF = new MaskedTextBox();
+            txtDataEntrada = new MaskedTextBox();
             lblNome = new Label();
-            button1 = new Button();
+            btnSalvar = new Button();
             btnCancelar = new Button();
             gpCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvCliente).BeginInit();
+            gpHospedagem.SuspendLayout();
             SuspendLayout();
             // 
             // gpCliente
             // 
-            gpCliente.Controls.Add(dataGridView1);
+            gpCliente.Controls.Add(gvCliente);
             gpCliente.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gpCliente.Location = new Point(12, 12);
             gpCliente.Name = "gpCliente";
@@ -55,36 +55,51 @@
             gpCliente.TabStop = false;
             gpCliente.Text = "Informações do cliente";
             // 
-            // dataGridView1
+            // gvCliente
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 32);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(628, 53);
-            dataGridView1.TabIndex = 0;
+            gvCliente.AllowUserToAddRows = false;
+            gvCliente.AllowUserToDeleteRows = false;
+            gvCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gvCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvCliente.Location = new Point(17, 32);
+            gvCliente.MultiSelect = false;
+            gvCliente.Name = "gvCliente";
+            gvCliente.ReadOnly = true;
+            gvCliente.RowHeadersVisible = false;
+            gvCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gvCliente.Size = new Size(593, 56);
+            gvCliente.TabIndex = 0;
             // 
-            // groupBox1
+            // gpHospedagem
             // 
-            groupBox1.Controls.Add(maskedTextBox2);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(maskedTextBox1);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(txtCPF);
-            groupBox1.Controls.Add(lblNome);
-            groupBox1.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(12, 152);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(640, 200);
-            groupBox1.TabIndex = 10;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Informações da hospedagem";
+            gpHospedagem.Controls.Add(txtValor);
+            gpHospedagem.Controls.Add(txtQuarto);
+            gpHospedagem.Controls.Add(label2);
+            gpHospedagem.Controls.Add(label1);
+            gpHospedagem.Controls.Add(txtDataEntrada);
+            gpHospedagem.Controls.Add(lblNome);
+            gpHospedagem.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gpHospedagem.Location = new Point(12, 152);
+            gpHospedagem.Name = "gpHospedagem";
+            gpHospedagem.Size = new Size(640, 200);
+            gpHospedagem.TabIndex = 10;
+            gpHospedagem.TabStop = false;
+            gpHospedagem.Text = "Informações da hospedagem";
             // 
-            // maskedTextBox2
+            // txtValor
             // 
-            maskedTextBox2.Location = new Point(17, 125);
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(254, 33);
-            maskedTextBox2.TabIndex = 8;
+            txtValor.Location = new Point(356, 49);
+            txtValor.Name = "txtValor";
+            txtValor.Size = new Size(254, 33);
+            txtValor.TabIndex = 9;
+            // 
+            // txtQuarto
+            // 
+            txtQuarto.Location = new Point(17, 125);
+            txtQuarto.Name = "txtQuarto";
+            txtQuarto.Size = new Size(254, 33);
+            txtQuarto.TabIndex = 8;
+            txtQuarto.KeyPress += txtQuarto_KeyPress;
             // 
             // label2
             // 
@@ -96,13 +111,6 @@
             label2.TabIndex = 7;
             label2.Text = "Quarto";
             // 
-            // maskedTextBox1
-            // 
-            maskedTextBox1.Location = new Point(356, 49);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(254, 33);
-            maskedTextBox1.TabIndex = 6;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -113,13 +121,14 @@
             label1.TabIndex = 5;
             label1.Text = "Diária";
             // 
-            // txtCPF
+            // txtDataEntrada
             // 
-            txtCPF.Location = new Point(17, 49);
-            txtCPF.Mask = "00/00/0000";
-            txtCPF.Name = "txtCPF";
-            txtCPF.Size = new Size(254, 33);
-            txtCPF.TabIndex = 4;
+            txtDataEntrada.Location = new Point(17, 49);
+            txtDataEntrada.Mask = "00/00/0000";
+            txtDataEntrada.Name = "txtDataEntrada";
+            txtDataEntrada.Size = new Size(254, 33);
+            txtDataEntrada.TabIndex = 4;
+            txtDataEntrada.KeyPress += txtDataEntrada_KeyPress;
             // 
             // lblNome
             // 
@@ -131,14 +140,15 @@
             lblNome.TabIndex = 2;
             lblNome.Text = "Data entrada";
             // 
-            // button1
+            // btnSalvar
             // 
-            button1.Location = new Point(12, 382);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 11;
-            button1.Text = "Salvar";
-            button1.UseVisualStyleBackColor = true;
+            btnSalvar.Location = new Point(12, 382);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(75, 23);
+            btnSalvar.TabIndex = 11;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnCancelar
             // 
@@ -156,32 +166,35 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(664, 427);
             Controls.Add(btnCancelar);
-            Controls.Add(button1);
-            Controls.Add(groupBox1);
+            Controls.Add(btnSalvar);
+            Controls.Add(gpHospedagem);
             Controls.Add(gpCliente);
             MaximizeBox = false;
+            MaximumSize = new Size(680, 466);
             MinimizeBox = false;
+            MinimumSize = new Size(680, 466);
             Name = "CadastroHospedagem";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de hospedagem";
             gpCliente.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gvCliente).EndInit();
+            gpHospedagem.ResumeLayout(false);
+            gpHospedagem.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox gpCliente;
-        private DataGridView dataGridView1;
-        private GroupBox groupBox1;
+        private DataGridView gvCliente;
+        private GroupBox gpHospedagem;
         private Label lblNome;
-        private MaskedTextBox txtCPF;
-        private MaskedTextBox maskedTextBox1;
+        private MaskedTextBox txtDataEntrada;
         private Label label1;
-        private MaskedTextBox maskedTextBox2;
+        private MaskedTextBox txtQuarto;
         private Label label2;
-        private Button button1;
+        private Button btnSalvar;
         private Button btnCancelar;
+        private TextBox txtValor;
     }
 }

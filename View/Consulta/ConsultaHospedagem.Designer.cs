@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaHospedagem));
-            toolStrip1 = new ToolStrip();
-            tpbNovo = new ToolStripButton();
+            tpHospedagem = new ToolStrip();
             tpbEditar = new ToolStripButton();
             toolStripButton1 = new ToolStripButton();
             btnFechar = new Button();
-            dataGridView1 = new DataGridView();
+            gvHospedagem = new DataGridView();
             btnConsultar = new Button();
             txtConsulta = new MaskedTextBox();
             cbSelecionar = new ComboBox();
@@ -42,28 +41,19 @@
             lblFiltrar = new Label();
             rdTodos = new RadioButton();
             rdAberto = new RadioButton();
-            toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            label1 = new Label();
+            tpHospedagem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvHospedagem).BeginInit();
             SuspendLayout();
             // 
-            // toolStrip1
+            // tpHospedagem
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tpbNovo, tpbEditar, toolStripButton1 });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 31);
-            toolStrip1.TabIndex = 6;
-            toolStrip1.Text = "tpCliente";
-            // 
-            // tpbNovo
-            // 
-            tpbNovo.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tpbNovo.Image = (Image)resources.GetObject("tpbNovo.Image");
-            tpbNovo.ImageScaling = ToolStripItemImageScaling.None;
-            tpbNovo.ImageTransparentColor = Color.Magenta;
-            tpbNovo.Name = "tpbNovo";
-            tpbNovo.Size = new Size(28, 28);
-            tpbNovo.Text = "Novo";
+            tpHospedagem.Items.AddRange(new ToolStripItem[] { tpbEditar, toolStripButton1 });
+            tpHospedagem.Location = new Point(0, 0);
+            tpHospedagem.Name = "tpHospedagem";
+            tpHospedagem.Size = new Size(800, 25);
+            tpHospedagem.TabIndex = 6;
+            tpHospedagem.Text = "tpCliente";
             // 
             // tpbEditar
             // 
@@ -71,7 +61,7 @@
             tpbEditar.Image = (Image)resources.GetObject("tpbEditar.Image");
             tpbEditar.ImageTransparentColor = Color.Magenta;
             tpbEditar.Name = "tpbEditar";
-            tpbEditar.Size = new Size(23, 28);
+            tpbEditar.Size = new Size(23, 22);
             tpbEditar.Text = "Editar";
             tpbEditar.Click += tpbEditar_Click;
             // 
@@ -81,8 +71,9 @@
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(23, 28);
+            toolStripButton1.Size = new Size(23, 22);
             toolStripButton1.Text = "Excluir";
+            toolStripButton1.Click += tpExcluir_Click;
             // 
             // btnFechar
             // 
@@ -94,15 +85,20 @@
             btnFechar.UseVisualStyleBackColor = true;
             btnFechar.Click += btnFechar_Click;
             // 
-            // dataGridView1
+            // gvHospedagem
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 89);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(776, 268);
-            dataGridView1.TabIndex = 12;
+            gvHospedagem.AllowUserToAddRows = false;
+            gvHospedagem.AllowUserToDeleteRows = false;
+            gvHospedagem.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gvHospedagem.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvHospedagem.Location = new Point(12, 89);
+            gvHospedagem.MultiSelect = false;
+            gvHospedagem.Name = "gvHospedagem";
+            gvHospedagem.ReadOnly = true;
+            gvHospedagem.RowHeadersVisible = false;
+            gvHospedagem.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gvHospedagem.Size = new Size(776, 268);
+            gvHospedagem.TabIndex = 12;
             // 
             // btnConsultar
             // 
@@ -175,21 +171,32 @@
             rdAberto.Text = "Em aberto";
             rdAberto.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 388);
+            label1.Name = "label1";
+            label1.Size = new Size(161, 13);
+            label1.TabIndex = 17;
+            label1.Text = "(Desabilitado ao consultar)";
+            // 
             // ConsultaHospedagem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 425);
+            Controls.Add(label1);
             Controls.Add(rdAberto);
             Controls.Add(rdTodos);
             Controls.Add(lblFiltrar);
             Controls.Add(btnFechar);
-            Controls.Add(dataGridView1);
+            Controls.Add(gvHospedagem);
             Controls.Add(btnConsultar);
             Controls.Add(txtConsulta);
             Controls.Add(cbSelecionar);
             Controls.Add(lblSelecionar);
-            Controls.Add(toolStrip1);
+            Controls.Add(tpHospedagem);
             MaximizeBox = false;
             MaximumSize = new Size(816, 464);
             MinimizeBox = false;
@@ -197,21 +204,20 @@
             Name = "ConsultaHospedagem";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Consulta de hospedagem";
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tpHospedagem.ResumeLayout(false);
+            tpHospedagem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gvHospedagem).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ToolStrip toolStrip1;
-        private ToolStripButton tpbNovo;
+        private ToolStrip tpHospedagem;
         private ToolStripButton tpbEditar;
         private ToolStripButton toolStripButton1;
         private Button btnFechar;
-        private DataGridView dataGridView1;
+        private DataGridView gvHospedagem;
         private Button btnConsultar;
         private MaskedTextBox txtConsulta;
         private ComboBox cbSelecionar;
@@ -219,5 +225,6 @@
         private Label lblFiltrar;
         private RadioButton rdTodos;
         private RadioButton rdAberto;
+        private Label label1;
     }
 }

@@ -25,5 +25,40 @@ namespace Hospedagem_em_C_.Controller
                 e.Handled = true; // Bloqueia o caractere
             }
         }
+
+        public void formatoPreco(KeyPressEventArgs e, TextBox txtPreco)
+        {
+            // permite o backspace
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // permite somente 1 ponto e digitos
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // permite somente 1 ponto
+            if (e.KeyChar == ',' && txtPreco.Text.Contains(','))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // permite apenas duas casas apos o ponto
+            int decimalIndex = txtPreco.Text.IndexOf(',');
+            if (decimalIndex != -1)
+            {
+                int decimalPlaces = txtPreco.Text.Length - decimalIndex - 1;
+                if (decimalPlaces >= 2)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
     }
 }
