@@ -54,6 +54,21 @@ namespace Hospedagem_em_C_.Controller
                 return false;
             }
         }
+        public List<ProdutoDTO> selecionarPorNome(String nome)
+        {
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            List<ProdutoDTO> produtos = produtoDAO.selecionarPorNome(nome);
+            return produtos;
+        }
+
+        public List<ProdutoDTO> selecionarPorID(String id)
+        {
+            int idProduto = int.Parse(id);
+
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            List<ProdutoDTO> produtos = produtoDAO.selecionarPorID(idProduto);
+            return produtos;
+        }
 
         public Boolean alterarQuantidade(ProdutoDTO produtoDTO, int quantidade)
         {

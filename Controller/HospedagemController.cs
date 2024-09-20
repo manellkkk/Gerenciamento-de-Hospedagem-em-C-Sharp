@@ -71,6 +71,22 @@ namespace Hospedagem_em_C_.Controller
                 return false;
             }
         }
+        public List<HospedagemDTO> selecionarPorID(String id)
+        {
+            int idHospedagem = int.Parse(id);
+
+            HospedagemDAO hospedagemDAO = new HospedagemDAO();
+            List<HospedagemDTO> hospedagens = hospedagemDAO.selecionarPorID(idHospedagem);
+            return hospedagens;
+        }
+        public List<HospedagemDTO> selecionarPorQuarto(String quarto)
+        {
+            int numeroQuarto = int.Parse(quarto);
+            HospedagemDAO hospedagemDAO = new HospedagemDAO();
+            List<HospedagemDTO> hospedagens = hospedagemDAO.selecionarPorQuarto(numeroQuarto);
+            return hospedagens;
+        }
+
 
         public Boolean excluirCliente(int id)
         {

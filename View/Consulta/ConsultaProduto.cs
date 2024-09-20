@@ -58,11 +58,11 @@ namespace Hospedagem_em_C_.View.Consulta
         {
             if (verificarSelecao() == "Nome")
             {
-
+                carregarTabela(produtoController.selecionarPorNome(txtConsulta.Text));
             }
             else
             {
-
+                carregarTabela(produtoController.selecionarPorID(txtConsulta.Text));
             }
         }
 

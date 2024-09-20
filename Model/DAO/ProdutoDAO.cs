@@ -51,6 +51,98 @@ namespace Hospedagem_em_C_.Model.DAO
             }
         }
 
+        public List<ProdutoDTO> selecionarPorNome(String nomeConsulta)
+        {
+            List<ProdutoDTO> produtos = new List<ProdutoDTO>();
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "SELECT * FROM produto WHERE nome LIKE @nome";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                comando.Parameters.AddWithValue("@nome", "%" + nomeConsulta + "%");
+
+                using (MySqlDataReader leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+
+                        //atribui o resultado a variaveis
+                        int id = int.Parse(leitor["idProduto"].ToString());
+                        String nome = leitor["nome"].ToString();
+                        int quantidade = int.Parse(leitor["quantidade"].ToString());
+                        double valor = double.Parse(leitor["valor"].ToString(), CultureInfo.InvariantCulture);
+
+                        //cria um produto baseado nas informacoes resgatadas do banco
+                        ProdutoDTO produto = new ProdutoDTO(id, nome, quantidade, valor);
+
+                        // Adiciona o cliente à lista
+                        produtos.Add(produto);
+                    }
+                }
+                mensagem = "Seleção realizada com sucesso.";
+                return produtos;  // Retorna a lista de clientes
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel inserir: ";
+                mensagem += ex.Message;
+                return null;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
+
+        public List<ProdutoDTO> selecionarPorID(int idConsulta)
+        {
+            List<ProdutoDTO> produtos = new List<ProdutoDTO>();
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "SELECT * FROM produto WHERE idProduto = @id";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                comando.Parameters.AddWithValue("@id", idConsulta);
+
+                using (MySqlDataReader leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+
+                        //atribui o resultado a variaveis
+                        int id = int.Parse(leitor["idProduto"].ToString());
+                        String nome = leitor["nome"].ToString();
+                        int quantidade = int.Parse(leitor["quantidade"].ToString());
+                        double valor = double.Parse(leitor["valor"].ToString(), CultureInfo.InvariantCulture);
+
+                        //cria um produto baseado nas informacoes resgatadas do banco
+                        ProdutoDTO produto = new ProdutoDTO(id, nome, quantidade, valor);
+
+                        // Adiciona o cliente à lista
+                        produtos.Add(produto);
+                    }
+                }
+                mensagem = "Seleção realizada com sucesso.";
+                return produtos;  // Retorna a lista de clientes
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel inserir: ";
+                mensagem += ex.Message;
+                return null;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
+
         public Boolean alterarQuantidade(ProdutoDTO produtoDTO, int quantidade)
         {
             try

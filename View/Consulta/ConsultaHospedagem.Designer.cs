@@ -108,6 +108,7 @@
             btnConsultar.TabIndex = 11;
             btnConsultar.Text = "Consultar";
             btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.Click += btnConsultar_Click;
             // 
             // txtConsulta
             // 
@@ -121,7 +122,7 @@
             // 
             cbSelecionar.DropDownStyle = ComboBoxStyle.DropDownList;
             cbSelecionar.FormattingEnabled = true;
-            cbSelecionar.Items.AddRange(new object[] { "Nome", "Quarto" });
+            cbSelecionar.Items.AddRange(new object[] { "ID", "Quarto" });
             cbSelecionar.Location = new Point(139, 47);
             cbSelecionar.Name = "cbSelecionar";
             cbSelecionar.Size = new Size(164, 23);

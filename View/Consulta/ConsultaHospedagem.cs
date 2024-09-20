@@ -33,9 +33,9 @@ namespace Hospedagem_em_C_.View.Consulta
         private String verificarSelecao()
         {
             //verifica o campo selecionado
-            if (cbSelecionar.SelectedItem.ToString() == "Nome")
+            if (cbSelecionar.SelectedItem.ToString() == "ID")
             {
-                return "Nome";
+                return "ID";
             }
             else
             {
@@ -51,14 +51,7 @@ namespace Hospedagem_em_C_.View.Consulta
 
         private void txtConsulta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (verificarSelecao() == "Nome")
-            {
-                entradaController.permitirApenasLetras(e);
-            }
-            else
-            {
-                entradaController.permitirApenasNumero(e);
-            }
+            entradaController.permitirApenasNumero(e);
         }
 
         private void tpbEditar_Click(object sender, EventArgs e)
@@ -178,6 +171,18 @@ namespace Hospedagem_em_C_.View.Consulta
             {
                 List<HospedagemDTO> hospedagens = hospedagemController.selecionarEmAberto();
                 carregarTabela(hospedagens);
+            }
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            if (verificarSelecao() == "ID")
+            {
+                carregarTabela(hospedagemController.selecionarPorID(txtConsulta.Text));
+            }
+            else
+            {
+                carregarTabela(hospedagemController.selecionarPorQuarto(txtConsulta.Text));
             }
         }
     }

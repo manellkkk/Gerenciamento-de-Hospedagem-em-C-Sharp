@@ -212,10 +212,10 @@ namespace Hospedagem_em_C_.Model.DAO
                 BancoDeDados.abrirConexao();
 
                 //define o comando a ser enviado ao banco
-                String comandoTexto = "SELECT * FROM cliente WHERE cpf LIKE @cpf";
+                String comandoTexto = "SELECT * FROM cliente WHERE cpf = @cpf";
                 MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
 
-                comando.Parameters.AddWithValue("@cpf", "%" + cpfConsulta + "%");
+                comando.Parameters.AddWithValue("@cpf", cpfConsulta);
 
                 using (MySqlDataReader leitor = comando.ExecuteReader())
                 {
