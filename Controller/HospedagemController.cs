@@ -73,7 +73,8 @@ namespace Hospedagem_em_C_.Controller
         }
         public List<HospedagemDTO> selecionarPorID(String id)
         {
-            int idHospedagem = int.Parse(id);
+            int idHospedagem;
+            int.TryParse(id, out idHospedagem);
 
             HospedagemDAO hospedagemDAO = new HospedagemDAO();
             List<HospedagemDTO> hospedagens = hospedagemDAO.selecionarPorID(idHospedagem);
@@ -81,7 +82,9 @@ namespace Hospedagem_em_C_.Controller
         }
         public List<HospedagemDTO> selecionarPorQuarto(String quarto)
         {
-            int numeroQuarto = int.Parse(quarto);
+            int numeroQuarto;
+            int.TryParse(quarto, out numeroQuarto);
+
             HospedagemDAO hospedagemDAO = new HospedagemDAO();
             List<HospedagemDTO> hospedagens = hospedagemDAO.selecionarPorQuarto(numeroQuarto);
             return hospedagens;
