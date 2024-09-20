@@ -111,11 +111,16 @@ namespace Hospedagem_em_C_.View.Consulta
         {
             if (verificarSelecao() == "Nome")
             {
-
+                carregarTabela(clienteController.selecionarPorNome(txtConsulta.Text));
             }
             else
             {
-
+                if (txtConsulta.Text.Length < 14)
+                {
+                    MessageBox.Show("Preencha o campo completamente.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                carregarTabela(clienteController.selecionarPorCPF(txtConsulta.Text));
             }
         }
 
@@ -166,7 +171,6 @@ namespace Hospedagem_em_C_.View.Consulta
 
             //abre a janela para editar cliente
             genCliente = new GerenciarCliente(cpf);
-
 
             //assim que a janela gerenciar for fechada, executa o gerenciarFechado e atualiza a tabela
             genCliente.FormClosed += gerenciarFechado;

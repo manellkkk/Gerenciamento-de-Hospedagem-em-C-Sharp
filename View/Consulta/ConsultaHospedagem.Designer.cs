@@ -158,6 +158,7 @@
             rdTodos.TabStop = true;
             rdTodos.Text = "Todos";
             rdTodos.UseVisualStyleBackColor = true;
+            rdTodos.CheckedChanged += rdTodos_CheckedChanged;
             // 
             // rdAberto
             // 
@@ -170,6 +171,7 @@
             rdAberto.TabStop = true;
             rdAberto.Text = "Em aberto";
             rdAberto.UseVisualStyleBackColor = true;
+            rdAberto.CheckedChanged += rdAberto_CheckedChanged;
             // 
             // label1
             // 

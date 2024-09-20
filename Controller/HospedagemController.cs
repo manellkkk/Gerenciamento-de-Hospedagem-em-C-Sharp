@@ -56,6 +56,22 @@ namespace Hospedagem_em_C_.Controller
             }
         }
 
+        public Boolean finalizarHospedagem(HospedagemDTO hospedagem)
+        {
+            HospedagemDAO hospedagemDAO = new HospedagemDAO();
+
+            if (hospedagemDAO.finalizarHospedagem(hospedagem))
+            {
+                MessageBox.Show(hospedagemDAO.getMensagem(), "Concluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(hospedagemDAO.getMensagem(), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
         public Boolean excluirCliente(int id)
         {
             HospedagemDAO hospedagemDAO = new HospedagemDAO();
@@ -91,6 +107,12 @@ namespace Hospedagem_em_C_.Controller
             return produtos;
         }
 
+        public List<HospedagemDTO> selecionarEmAberto()
+        {
+            HospedagemDAO hospedagemDAO = new HospedagemDAO();
+            List<HospedagemDTO> produtos = hospedagemDAO.selecionarEmAberto();
+            return produtos;
+        }
         private Boolean verificarCampos(String data, double valor, int quarto)
         {
             return data.Length < 8 || valor == 0 || verificarCampoVazio(quarto.ToString());

@@ -51,6 +51,37 @@ namespace Hospedagem_em_C_.Model.DAO
             }
         }
 
+        public Boolean finalizarHospedagem(HospedagemDTO hospedagemDTO)
+        {
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "UPDATE hospedagem SET dataSaida = @dataSaida WHERE idHospedagem = @id";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                //substitui os @ do texto e adiciona os valores dentro de clienteDTO como paramentros para serem adicionados
+                comando.Parameters.AddWithValue("@id", hospedagemDTO.getHospedagem());
+                comando.Parameters.AddWithValue("@dataSaida", hospedagemDTO.getDataSaida());
+
+                //executa o comando
+                comando.ExecuteNonQuery();
+                mensagem = "Finalizado com sucesso.";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel inserir: ";
+                mensagem += ex.Message;
+                return false;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
+
         public List<HospedagemDTO> selecionarTodos()
         {
             List<HospedagemDTO> hospedagens = new List<HospedagemDTO>();
@@ -95,6 +126,49 @@ namespace Hospedagem_em_C_.Model.DAO
             }
         }
 
+        public List<HospedagemDTO> selecionarEmAberto()
+        {
+            List<HospedagemDTO> hospedagens = new List<HospedagemDTO>();
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "SELECT * FROM hospedagem WHERE dataSaida IS NULL";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                using (MySqlDataReader leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+
+                        int idHospedagem = Convert.ToInt32(leitor["idHospedagem"]);
+                        String idCliente = leitor["fk_cliente"].ToString();
+                        DateTime dataEntrada = Convert.ToDateTime(leitor["dataEntrada"]);
+                        DateTime? dataSaida = leitor["dataSaida"] != DBNull.Value ? (DateTime?)Convert.ToDateTime(leitor["dataSaida"]) : null;
+                        double valor = Convert.ToDouble(leitor["valor"]);
+                        int quarto = Convert.ToInt32(leitor["quarto"]);
+
+                        HospedagemDTO cliente = new HospedagemDTO(idHospedagem, idCliente, dataEntrada, dataSaida, valor, quarto);
+
+                        // Adiciona o cliente à lista
+                        hospedagens.Add(cliente);
+                    }
+                }
+                mensagem = "Seleção realizada com sucesso.";
+                return hospedagens;  // Retorna a lista de clientes
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel selecionar: ";
+                mensagem += ex.Message;
+                return null;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
         public HospedagemDTO selecionarHospedagem(int id)
         {
             try

@@ -131,5 +131,18 @@ namespace Hospedagem_em_C_.Controller
             }
             return cliente;
         }
+        public List<ClienteDTO> selecionarPorNome(String nome)
+        {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            List<ClienteDTO> clientes = clienteDAO.selecionarPorNome(nome);
+            return clientes;
+        }
+
+        public List<ClienteDTO> selecionarPorCPF(String cpf)
+        {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            List<ClienteDTO> clientes = clienteDAO.selecionarPorCPF(cpf);
+            return clientes;
+        }
     }
 }

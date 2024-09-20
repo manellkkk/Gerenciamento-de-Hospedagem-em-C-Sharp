@@ -55,6 +55,12 @@ namespace Hospedagem_em_C_.Controller
             }
         }
 
+        public Boolean alterarQuantidade(ProdutoDTO produtoDTO, int quantidade)
+        {
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            return produtoDAO.alterarQuantidade(produtoDTO, quantidade);
+        }
+
         public Boolean atualizarProduto(int id, String nome, String qtd, String strValor)
         {
             //passa os valores para os formatos certos
@@ -73,7 +79,7 @@ namespace Hospedagem_em_C_.Controller
             ProdutoDAO produtoDAO = new ProdutoDAO();
 
 
-            if (produtoDAO.atualizarCliente(produtoDTO))
+            if (produtoDAO.atualizarProduto(produtoDTO))
             {
                 MessageBox.Show(produtoDAO.getMensagem(), "Concluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;

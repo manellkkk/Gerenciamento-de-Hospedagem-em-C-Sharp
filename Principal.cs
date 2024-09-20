@@ -78,7 +78,7 @@ namespace Hospedagem_em_C_
         private void produtoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //abre janela de consulta de produto
-            ConsultaProduto conProduto = new ConsultaProduto();
+            ConsultaProduto conProduto = new ConsultaProduto(0);
             conProduto.MdiParent = this;
             conProduto.Show();
         }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Hospedagem_em_C_.View.Consulta
 {
@@ -19,19 +20,25 @@ namespace Hospedagem_em_C_.View.Consulta
     {
         EntradaController entradaController = new EntradaController();
         ProdutoController produtoController = new ProdutoController();
+        int idHospedagem = 0;
 
         GerenciarProduto genProduto = null;
-        public ConsultaProduto()
+        public ConsultaProduto(int idHospedagem)
         {
             InitializeComponent();
-            inicializarSelecionarPor();
+            this.idHospedagem = idHospedagem;
+            inicializarComponentes();
             carregarTabelaProduto();
         }
-        private void inicializarSelecionarPor()
+        private void inicializarComponentes()
         {
-
             //inicia a combo box com o campo nome selecionado
             cbSelecionar.SelectedIndex = 0;
+
+            if (verificarOrigem())
+            {
+                btnFechar.Text = "Selecionar";
+            }
         }
 
         private String verificarSelecao()
@@ -61,7 +68,36 @@ namespace Hospedagem_em_C_.View.Consulta
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
-            Dispose();
+            if (verificarOrigem())
+            {
+                //seleciona o cpf da linha selecionada
+                int id = idLinhaSelecionada();
+
+                //verifica se tem linha selecionada
+                if (id == 0)
+                {
+                    MessageBox.Show("Nao ha linha selecionada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                GerenciarConsumo gerenciarConsumo = new GerenciarConsumo(idHospedagem, id);
+                gerenciarConsumo.FormClosed += consumoFechado;
+                gerenciarConsumo.Show();
+            }
+            else
+            {
+                Dispose();
+            }
+        }
+
+        private void consumoFechado(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private Boolean verificarOrigem()
+        {
+            return idHospedagem != 0;
         }
 
         private void tpbNovo_Click(object sender, EventArgs e)

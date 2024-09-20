@@ -51,7 +51,38 @@ namespace Hospedagem_em_C_.Model.DAO
             }
         }
 
-        public Boolean atualizarCliente(ProdutoDTO produto)
+        public Boolean alterarQuantidade(ProdutoDTO produtoDTO, int quantidade)
+        {
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "UPDATE produto SET quantidade = @quantidade WHERE idProduto = @id";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                //substitui os @ do texto e adiciona os valores dentro de clienteDTO como paramentros para serem adicionados
+                comando.Parameters.AddWithValue("@quantidade", quantidade);
+                comando.Parameters.AddWithValue("@id", produtoDTO.getIdProduto());
+
+                //executa o comando
+                comando.ExecuteNonQuery();
+                mensagem = "Atualizado com sucesso.";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel alterar: ";
+                mensagem += ex.Message;
+                return false;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
+
+        public Boolean atualizarProduto(ProdutoDTO produto)
         {
             try
             {
@@ -74,7 +105,7 @@ namespace Hospedagem_em_C_.Model.DAO
             }
             catch (Exception ex)
             {
-                mensagem = "Nao foi possivel inserir: ";
+                mensagem = "Nao foi possivel atualizar: ";
                 mensagem += ex.Message;
                 return false;
             }
@@ -147,7 +178,7 @@ namespace Hospedagem_em_C_.Model.DAO
             }
             catch (Exception ex)
             {
-                mensagem = "Nao foi possivel inserir: ";
+                mensagem = "Nao foi possivel selecionar: ";
                 mensagem += ex.Message;
                 return null;
             }

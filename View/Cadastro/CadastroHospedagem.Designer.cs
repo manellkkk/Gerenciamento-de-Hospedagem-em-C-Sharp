@@ -92,6 +92,7 @@
             txtValor.Name = "txtValor";
             txtValor.Size = new Size(254, 33);
             txtValor.TabIndex = 9;
+            txtValor.KeyPress += txtDataEntrada_KeyPress;
             // 
             // txtQuarto
             // 

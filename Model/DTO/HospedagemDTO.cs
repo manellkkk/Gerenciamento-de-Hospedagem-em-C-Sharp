@@ -33,6 +33,10 @@ namespace Hospedagem_em_C_.Model.DTO
         {
             return dataSaida;
         }
+        public void setDataSaida(DateTime? dataSaida)
+        {
+            this.dataSaida = dataSaida;
+        }
         public double getValor()
         {
             return valor;

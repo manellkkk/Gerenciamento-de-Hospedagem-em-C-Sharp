@@ -159,6 +159,96 @@ namespace Hospedagem_em_C_.Model.DAO
             }
         }
 
+        public List<ClienteDTO> selecionarPorNome(String nomeConsulta)
+        {
+            List<ClienteDTO> clientes = new List<ClienteDTO>();
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "SELECT * FROM cliente WHERE nome LIKE @nome";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                comando.Parameters.AddWithValue("@nome", "%" + nomeConsulta + "%");
+
+                using (MySqlDataReader leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+
+                        // Supondo que você tenha esses métodos de get/set na classe ClienteDTO
+                        String nome = leitor["nome"].ToString();
+                        String cpf = leitor["cpf"].ToString();
+                        String telefone = leitor["telefone"].ToString();
+                        String placaDoCarro = leitor["placaDoCarro"].ToString();
+
+                        ClienteDTO cliente = new ClienteDTO(nome, cpf, telefone, placaDoCarro);
+
+                        // Adiciona o cliente à lista
+                        clientes.Add(cliente);
+                    }
+                }
+                mensagem = "Seleção realizada com sucesso.";
+                return clientes;  // Retorna a lista de clientes
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel inserir: ";
+                mensagem += ex.Message;
+                return null;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
+
+        public List<ClienteDTO> selecionarPorCPF(String cpfConsulta)
+        {
+            List<ClienteDTO> clientes = new List<ClienteDTO>();
+            try
+            {
+                BancoDeDados.abrirConexao();
+
+                //define o comando a ser enviado ao banco
+                String comandoTexto = "SELECT * FROM cliente WHERE cpf LIKE @cpf";
+                MySqlCommand comando = new MySqlCommand(comandoTexto, BancoDeDados.getConexao());
+
+                comando.Parameters.AddWithValue("@cpf", "%" + cpfConsulta + "%");
+
+                using (MySqlDataReader leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+
+                        // Supondo que você tenha esses métodos de get/set na classe ClienteDTO
+                        String nome = leitor["nome"].ToString();
+                        String cpf = leitor["cpf"].ToString();
+                        String telefone = leitor["telefone"].ToString();
+                        String placaDoCarro = leitor["placaDoCarro"].ToString();
+
+                        ClienteDTO cliente = new ClienteDTO(nome, cpf, telefone, placaDoCarro);
+
+                        // Adiciona o cliente à lista
+                        clientes.Add(cliente);
+                    }
+                }
+                mensagem = "Seleção realizada com sucesso.";
+                return clientes;  // Retorna a lista de clientes
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Nao foi possivel inserir: ";
+                mensagem += ex.Message;
+                return null;
+            }
+            finally
+            {
+                BancoDeDados.fecharConexao();
+            }
+        }
+
         public ClienteDTO selecionarCliente(String cpf)
         {
             try

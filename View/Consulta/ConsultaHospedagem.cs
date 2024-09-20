@@ -1,5 +1,6 @@
 ﻿using Hospedagem_em_C_.Controller;
 using Hospedagem_em_C_.Model.DTO;
+using Hospedagem_em_C_.View.Gerenciar;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Hospedagem_em_C_.View.Consulta
     {
         EntradaController entradaController = new EntradaController();
         HospedagemController hospedagemController = new HospedagemController();
+        GerenciarHospedagem genHospedagem = null;
         public ConsultaHospedagem()
         {
             InitializeComponent();
@@ -61,7 +63,26 @@ namespace Hospedagem_em_C_.View.Consulta
 
         private void tpbEditar_Click(object sender, EventArgs e)
         {
+            //seleciona o id da hospedagem, da linha selecionada
+            int id = idLinhaSelecionada();
 
+            //verifica se tem linha selecionada
+            if (id == 0)
+            {
+                MessageBox.Show("Nao ha linha selecionada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //abre a janela para editar cliente
+            genHospedagem = new GerenciarHospedagem(id);
+
+            genHospedagem.FormClosed += gerenciarFechado;
+
+            genHospedagem.Show();
+        }
+        private void gerenciarFechado(object sender, FormClosedEventArgs e)
+        {
+            carregarTabelaHospedagem();
         }
 
         private void carregarTabelaHospedagem()
@@ -135,6 +156,29 @@ namespace Hospedagem_em_C_.View.Consulta
             }
             gvHospedagem.ClearSelection();
             return 0;
+        }
+
+        private void rdTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void rdAberto_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void filtrar()
+        {
+            if (rdTodos.Checked)
+            {
+                carregarTabelaHospedagem();
+            }
+            else
+            {
+                List<HospedagemDTO> hospedagens = hospedagemController.selecionarEmAberto();
+                carregarTabela(hospedagens);
+            }
         }
     }
 }
